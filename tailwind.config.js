@@ -55,6 +55,10 @@ module.exports = {
 				"raisin-black": "#222222",
 				// TODO: get better name
 				placeholder: "#777",
+				green: {
+					main: "hsl(var(--green-main) / <alpha-value>)",
+					light: "hsl(var(--green-light) / <alpha-value>)",
+				},
 			},
 			borderRadius: {
 				lg: "var(--radius)",

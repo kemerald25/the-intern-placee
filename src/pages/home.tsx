@@ -1,5 +1,6 @@
-import { Bookmark, X } from "lucide-react";
+import { MapPin, X } from "lucide-react";
 import { useState } from "react";
+import { Bookmark } from "../components/Bookmark";
 import { Button } from "../components/ui/button";
 import {
 	Card,
@@ -65,6 +66,32 @@ export default function Home() {
 						<JobDetailsBriefCard />
 					</div>
 				</section>
+
+				<section className="py-6 space-y-4">
+					<div className="flex items-center justify-between w-full">
+						<h2 className="font-semibold text-xl inline-flex items-center gap-x-2">
+							<span className="size-6">
+								<img
+									src="/svgs/jobs-top-applicant.svg"
+									alt=""
+									width={150}
+									height={150}
+									className="w-full h-full object-cover"
+								/>
+							</span>
+							Jobs where you are a top applicant
+						</h2>
+						<Button variant={"secondary"}>See all</Button>
+					</div>
+					<div className="grid grid-cols-2 gap-4">
+						<JobCard />
+						<JobCard />
+						<JobCard />
+						<JobCard />
+						<JobCard />
+						<JobCard />
+					</div>
+				</section>
 			</InlinePaddingContainer>
 		</RootLayout>
 	);
@@ -99,9 +126,57 @@ const JobDetailsBriefCard = () => {
 				<Button variant="outline" className="bg-transparent grow">
 					View
 				</Button>
-				<Button variant={"outline"} className="bg-transparent">
-					<Bookmark className="stroke-[#AAA]" />
-				</Button>
+				<Bookmark isBookmarked={true} />
+			</CardFooter>
+		</Card>
+	);
+};
+
+// TODO: move to its own file
+const JobCard = () => {
+	return (
+		<Card className="grow border-none">
+			<CardHeader className="flex-row items-center gap-x-3 justify-between">
+				<div className="flex gap-x-3">
+					<div className="aspect-square w-12 rounded-lg overflow-hidden">
+						<img
+							className="w-full h-full object-cover"
+							src="/svgs/demo-logo.svg"
+							alt="demo logo"
+							width={150}
+							height={150}
+						/>
+					</div>
+					<div>
+						<CardTitle className="text-placeholder text-base">
+							Product Designer
+						</CardTitle>
+						<CardDescription className="text-base text-white">
+							WorkOS
+						</CardDescription>
+					</div>
+				</div>
+				<div className="flex items-center gap-x-2">
+					<div className="bg-green-light/[7] rounded-lg px-3 py-1.5">
+						<p className="text-green-light text-sm">1200 $</p>
+					</div>
+					<Bookmark isBookmarked={false} />
+				</div>
+			</CardHeader>
+			<CardFooter className="flex gap-x-6 text-sm">
+				<p>15 hours ago</p>
+				<div className="inline-flex items-center gap-x-1.5">
+					<MapPin size={20} />
+					<p>London or remote</p>
+				</div>
+				<div className="flex items-center gap-x-1.5">
+					<div className="flex items-center">
+						<div className="size-6 rounded-full bg-red-500 border border-background-main"></div>
+						<div className="size-6 rounded-full -ml-3 bg-blue-500 border border-background-main"></div>
+						<div className="size-6 rounded-full -ml-3 bg-green-500 border border-background-main"></div>
+					</div>
+					<p>7 followers with the hiring team</p>
+				</div>
 			</CardFooter>
 		</Card>
 	);
