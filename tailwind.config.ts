@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+const config = {
 	darkMode: ["class"],
 	content: [
 		"./pages/**/*.{ts,tsx}",
@@ -59,6 +60,9 @@ module.exports = {
 					main: "hsl(var(--green-main) / <alpha-value>)",
 					light: "hsl(var(--green-light) / <alpha-value>)",
 				},
+				blue: {
+					light: "hsl(var(--blue-light) / <alpha-value>)",
+				}
 			},
 			borderRadius: {
 				lg: "var(--radius)",
@@ -82,4 +86,6 @@ module.exports = {
 		},
 	},
 	plugins: [require("tailwindcss-animate")],
-};
+} satisfies Config;
+
+export default config;
