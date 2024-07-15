@@ -62,7 +62,10 @@ const config = {
 				},
 				blue: {
 					light: "hsl(var(--blue-light) / <alpha-value>)",
-				}
+				},
+				divider: {
+					md: "hsl(var(--divider-md) / <alpha-value>)",
+				},
 			},
 			borderRadius: {
 				lg: "var(--radius)",
