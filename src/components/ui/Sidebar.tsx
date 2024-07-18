@@ -1,6 +1,13 @@
-import { Bookmark, Briefcase, Search } from "lucide-react";
+import { Bookmark, Briefcase, LogIn, Search } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../lib/utils";
+import { Logo } from "./logo";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "./tooltip";
 
 const NAV_LINKS = [
 	{
@@ -18,6 +25,11 @@ const NAV_LINKS = [
 		icon: <Bookmark size={28} />,
 		label: "Bookmarks",
 	},
+	{
+		href: "/signin",
+		icon: <LogIn size={28} />,
+		label: "Sign in",
+	},
 ];
 
 const Sidebar = () => {
@@ -25,29 +37,32 @@ const Sidebar = () => {
 
 	return (
 		<aside className="bg-raisin-black flex flex-col justify-between pt-[1.5rem] px-[0.5625rem] w-full max-w-[3.5625rem] h-dvh sticky top-0 left-0">
-			<Link to="/">
-				<img
-					src="/svgs/logo.svg"
-					alt="The Intern Place"
-					width={39}
-					height={36}
-				/>
-			</Link>
+			<Logo />
 			<div className="mb-6 space-y-10">
-				{NAV_LINKS.map(({ href, icon }) => {
+				{NAV_LINKS.map(({ href, icon, label }) => {
 					const isActiveLink = href === pathname;
 					return (
-						<Link
-							to={href}
-							className={cn(
-								"before:absolute size-9 flex items-center justify-center relative before:-left-2 before:rounded-e before:bg-white before:h-full",
-								{
-									"before:w-1 [&_>_svg]:stroke-white":
-										isActiveLink,
-								}
-							)}>
-							{icon}
-						</Link>
+						<div key={href}>
+							<TooltipProvider delayDuration={100}>
+								<Tooltip>
+									<TooltipTrigger>
+										<Link
+											to={href}
+											className={cn(
+												"before:absolute size-9 flex items-center justify-center relative before:-left-2 before:rounded-e before:bg-white before:h-full",
+												{
+													"before:w-1 [&_>_svg]:stroke-white": isActiveLink,
+													"[&_>_svg]:hover:stroke-white hover:bg-accent":
+														!isActiveLink,
+												}
+											)}>
+											{icon}
+										</Link>
+									</TooltipTrigger>
+									<TooltipContent>{label}</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
+						</div>
 					);
 				})}
 				<div className="aspect-square  rounded-full overflow-hidden">
